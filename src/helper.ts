@@ -9,7 +9,7 @@ type Log = (message: string) => void;
 
 export function defaultHelperPath(): string {
   const extension = process.platform === "win32" ? ".exe" : "";
-  return fileURLToPath(new URL(`../bin/opencode-awake-${process.platform}-${process.arch}${extension}`, import.meta.url));
+  return fileURLToPath(new URL(`../bin/opencode-awake${extension}`, import.meta.url));
 }
 
 export class HelperClient {

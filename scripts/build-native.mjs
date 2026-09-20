@@ -1,5 +1,5 @@
 import { spawnSync } from "node:child_process";
-import { copyFileSync, mkdirSync, chmodSync } from "node:fs";
+import { copyFileSync, mkdirSync, chmodSync, rmSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { join } from "node:path";
 import { homedir } from "node:os";
@@ -24,7 +24,10 @@ if (result.error) throw result.error;
 if (result.status !== 0) process.exit(result.status ?? 1);
 const suffix = process.platform === "win32" ? ".exe" : "";
 mkdirSync(join(root, "bin"), { recursive: true });
-const destination = join(root, "bin", `opencode-awake-${process.platform}-${process.arch}${suffix}`);
+const destination = join(root, "bin", `opencode-awake${suffix}`);
 copyFileSync(join(root, "native", "target", "release", `opencode-awake-helper${suffix}`), destination);
+// Remove this build's obsolete filename so it is not included in packages.
+rmSync(join(root, "bin", `opencode-awake-${process.platform}-${process.arch}${suffix}`), { force: true });
+rmSync(join(root, "bin", `opencode-awake-helper${suffix}`), { force: true });
 if (process.platform !== "win32") chmodSync(destination, 0o755);
 console.log(`Built ${destination}`);

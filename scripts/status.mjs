@@ -1,10 +1,18 @@
 import { OpenCode } from "@opencode/client";
 import { Service } from "@opencode/client/service";
 import { spawnSync } from "node:child_process";
+import { setTimeout as delay } from "node:timers/promises";
 
-const endpoint = await Service.discover();
+let endpoint;
+for (let attempt = 0; attempt < 3; attempt++) {
+  try { endpoint = await Service.discover(); } catch { /* Discovery failure is not proof of inactivity. */ }
+  if (endpoint) break;
+  if (attempt < 2) await delay(500);
+}
 if (!endpoint) {
-  console.log("No running local OpenCode service was discovered.");
+  console.log("OpenCode activity: unknown (service discovery did not succeed after 3 attempts).");
+  console.log("This does not mean the service stopped or its sleep assertion was released.");
+  console.log("Check opencode service status in the same terminal. Elevated terminals may use different user/environment settings.");
 } else {
   const client = OpenCode.make({ baseUrl: endpoint.url, headers: Service.headers(endpoint) });
   const signal = AbortSignal.timeout(5_000);

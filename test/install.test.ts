@@ -90,7 +90,7 @@ test("managed install, update, CLI, rollback, and uninstall work outside a check
     await writeFile(join(source, "package.json"), JSON.stringify({ name: "@liubsp/opencode-awake", version: "0.0.0-test", type: "module" }));
     await writeFile(join(source, "index.js"), 'export { default } from "./dist/index.js";');
     await writeFile(join(source, "dist/index.js"), 'export default { id: "liubsp.opencode-awake", generation: 1 };');
-    await writeFile(join(source, "bin", `opencode-awake-${process.platform}-${process.arch}${process.platform === "win32" ? ".exe" : ""}`), "fixture");
+    await writeFile(join(source, "bin", `opencode-awake${process.platform === "win32" ? ".exe" : ""}`), "fixture");
     const settings = { source, dataDir, configDir, binDir };
     const first = await install(settings);
     assert.equal((await import(pathToFileURL(join(dataDir, "index.js")).href)).default.generation, 1);

@@ -18,7 +18,7 @@ export async function install({ source, dataDir, configDir, binDir }) {
   const manifest = JSON.parse(await readFile(join(source, "package.json"), "utf8"));
   const versionDir = join(dataDir, "versions", `${manifest.version}-${randomUUID()}`);
   const suffix = process.platform === "win32" ? ".exe" : "";
-  const binary = `opencode-awake-${process.platform}-${process.arch}${suffix}`;
+  const binary = `opencode-awake${suffix}`;
   if (!await exists(join(source, "dist", "index.js")) || !await exists(join(source, "bin", binary))) {
     throw new Error("Build the plugin before running setup");
   }

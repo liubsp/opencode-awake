@@ -28,7 +28,7 @@ cargo clippy --manifest-path native/Cargo.toml --all-targets -- -D warnings
 ```
 
 `npm run build` compiles Rust in release mode, copies the executable to
-`bin/opencode-awake-<platform>-<arch>[.exe]`, and compiles TypeScript into `dist/`.
+`bin/opencode-awake[.exe]`, and compiles TypeScript into `dist/`.
 Both output directories are ignored by Git. The Cargo and npm lockfiles are committed inputs.
 Release builds remap checkout, home, and Cargo paths so embedded compiler metadata does not expose
 the build environment's private filesystem layout.

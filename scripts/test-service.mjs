@@ -20,7 +20,7 @@ const directories = await Promise.all([mkdtemp(join(base, "awake-a-")), mkdtemp(
 const pluginID = "liubsp.opencode-awake";
 const sessions = [];
 function helpers() {
-  const name = `opencode-awake-${process.platform}-${process.arch}${process.platform === "win32" ? ".exe" : ""}`;
+  const name = `opencode-awake${process.platform === "win32" ? ".exe" : ""}`;
   if (process.platform === "win32") {
     const result = spawnSync("powershell.exe", ["-NoProfile", "-NonInteractive", "-Command",
       `Get-CimInstance Win32_Process -Filter \"Name = '${name}' AND ParentProcessId = ${info.pid}\" | Select-Object -ExpandProperty ProcessId`], { encoding: "utf8", windowsHide: true });
