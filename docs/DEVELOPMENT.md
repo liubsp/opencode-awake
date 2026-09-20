@@ -138,7 +138,7 @@ temporary installation afterward and leaves the `.tgz` in the checkout.
 
 `npm pack` builds first through `prepack`. Each package contains the binary for the build machine;
 it is a platform-specific local artifact. The package is private and is not published to npm.
-The CI matrix creates separate Windows and macOS artifacts.
+The CI matrix creates separate Windows and Apple Silicon macOS artifacts.
 
 ## Sources
 

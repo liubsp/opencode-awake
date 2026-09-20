@@ -11,7 +11,7 @@ while work is active, and releases its request when the last session finishes.
 - **System sleep only**, with normal display timeout and screen locking.
 - **Concurrent sessions and child agents**, tracked across the OpenCode service.
 - **Automatic cleanup**, including owner-process exit and expired activity leases.
-- **Native Rust helper** for Windows and macOS, connected through a V2 plugin.
+- **Native Rust helper** for Windows and macOS (Apple Silicon), connected through a V2 plugin.
 
 ## Install
 

@@ -13,8 +13,8 @@ Verified for **Windows x64 with OpenCode 2.0.8**:
 - Unloading the first location preserved the second; final unload terminated the helper.
 
 The macOS implementation and CI jobs are present, but **macOS runtime validation is pending**.
-The workflow targets Windows, Apple
-Silicon macOS, and Intel macOS; adding the workflow is not evidence that those remote jobs passed.
+The workflow targets Windows and Apple Silicon macOS; adding the workflow is not evidence that
+those remote jobs passed.
 
 Actual screen-off and idle-sleep timeout behavior still requires hardware testing. Native API
 acquisition passed without elevation; verification using the Windows `powercfg /requests`

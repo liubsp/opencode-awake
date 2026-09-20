@@ -5,7 +5,7 @@
 - OpenCode V2 (tested with 2.0.8).
 - Node.js 22+, npm, and Rust stable.
 - Windows: Visual Studio C++ Build Tools.
-- macOS: Xcode command-line tools.
+- macOS (Apple Silicon): Xcode command-line tools.
 
 Windows x64 has been live-tested. macOS support is implemented, with runtime validation pending.
 
