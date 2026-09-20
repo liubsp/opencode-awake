@@ -123,10 +123,10 @@ test("managed install, update, CLI, rollback, and uninstall work outside a check
 
 test("public timing options use whole seconds within the watchdog window", () => {
   const defaults = parseOptions({});
-  assert.equal(defaults.pollMs, 10_000);
+  assert.equal(defaults.pollMs, 60_000);
   assert.equal(defaults.releaseDelayMs, 1_000);
   assert.equal(parseOptions({ pollSeconds: 3, releaseDelaySeconds: 0 }).pollMs, 3_000);
   assert.throws(() => parseOptions({ pollSeconds: 0.5 }), /integer/);
-  assert.throws(() => parseOptions({ pollSeconds: 30 }), /integer/);
+  assert.throws(() => parseOptions({ pollSeconds: 181 }), /integer/);
   assert.throws(() => parseOptions({ pollMs: 2000 }), /use pollSeconds/);
 });

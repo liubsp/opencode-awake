@@ -38,7 +38,7 @@ export function parseOptions(input: Record<string, unknown>): Options {
   }
   if (input.debug !== undefined && typeof input.debug !== "boolean") throw new Error("opencode-awake: debug must be boolean");
   return {
-    pollMs: number("pollSeconds", 10, 1, 10) * 1_000,
+    pollMs: number("pollSeconds", 60, 1, 60) * 1_000,
     releaseDelayMs: number("releaseDelaySeconds", 1, 0, 5) * 1_000,
     helperPath, serviceFile, serverUrl, authorizationEnv: string("authorizationEnv"), debug: input.debug === true,
   };

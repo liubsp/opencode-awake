@@ -52,8 +52,8 @@ See [usage and troubleshooting](docs/USAGE.md) for diagnostics and what counts a
 ## What to expect
 
 The plugin protects the **machine hosting the OpenCode service**. It checks active sessions every
-**ten seconds** as recovery, responds to live events, and releases **one second** after the final idle snapshot.
-If activity can't be verified, its last lease expires within **30 seconds**.
+**minute** as recovery, responds to live events, and releases **one second** after the final idle snapshot.
+If activity can't be verified, its last lease expires within **three minutes**.
 
 Permission waits follow OpenCode's active status. Detached processes after their session becomes
 inactive aren't counted. Explicit sleep and lid-close policy remain controlled by the OS;

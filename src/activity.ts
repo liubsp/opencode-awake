@@ -86,7 +86,7 @@ export class ActivityMonitor {
           this.applySnapshot(snapshot);
         } catch (error) {
           if (!this.stopped && !this.snapshotFailed) {
-            this.warn(`active-session snapshot unavailable; existing leases expire within 30s: ${String(error)}`);
+            this.warn(`active-session snapshot unavailable; existing leases expire within 3 minutes: ${String(error)}`);
             this.snapshotFailed = true;
           }
           // Do not renew a lease using an old snapshot.

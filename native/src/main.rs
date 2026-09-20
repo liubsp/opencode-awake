@@ -9,7 +9,7 @@ use std::{
     time::{Duration, Instant},
 };
 
-const MAX_LEASE_MS: u64 = 30_000;
+const MAX_LEASE_MS: u64 = 180_000;
 
 #[derive(Deserialize)]
 #[serde(deny_unknown_fields)]
@@ -32,7 +32,7 @@ impl Leases {
             if command.ttl_ms == 0 || command.ttl_ms > MAX_LEASE_MS {
                 return Err(io::Error::new(
                     io::ErrorKind::InvalidInput,
-                    "ttl_ms must be 1..30000",
+                    "ttl_ms must be 1..180000",
                 ));
             }
             self.0
@@ -170,7 +170,7 @@ mod tests {
         let mut leases = Leases::default();
         assert!(
             leases
-                .update(update("x", true, 30_001), Instant::now())
+                .update(update("x", true, 180_001), Instant::now())
                 .is_err()
         );
         assert!(leases.update(update("x", true, 0), Instant::now()).is_err());

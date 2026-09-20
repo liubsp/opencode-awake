@@ -105,10 +105,10 @@ as a fallback. Parent death closes stdin immediately; a hung parent stops renewi
 The helper reads one JSON object per line from stdin:
 
 ```json
-{"owner":"unique-plugin-instance","active":true,"ttl_ms":30000}
+{"owner":"unique-plugin-instance","active":true,"ttl_ms":180000}
 ```
 
-Use `active: false` to release that owner. TTLs must be 1–30000 milliseconds for active leases.
+Use `active: false` to release that owner. TTLs must be 1–180000 milliseconds for active leases.
 Each owner expires independently using Rust's monotonic clock. The helper acquires one assertion
 while any fresh lease exists, and releases it when the map becomes empty. Malformed input fails
 closed; EOF exits and releases resources.

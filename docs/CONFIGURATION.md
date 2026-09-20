@@ -9,7 +9,7 @@ Defaults work without options. To customize the plugin, use the object form in O
   "plugins": [{
     "package": "C:/path/to/opencode-awake",
     "options": {
-      "pollSeconds": 10,
+      "pollSeconds": 60,
       "releaseDelaySeconds": 1,
       "debug": false
     }
@@ -23,7 +23,7 @@ plugin entries and settings. Timing values are whole seconds. The installer migr
 
 | Option | Default | Meaning |
 | --- | --- | --- |
-| `pollSeconds` | `10` | Recovery snapshot interval, 1–10 whole seconds. Live events trigger earlier updates. |
+| `pollSeconds` | `60` | Recovery snapshot interval, 1–60 whole seconds. Live events trigger earlier updates. |
 | `releaseDelaySeconds` | `1` | Final-release debounce, 0–5 whole seconds, covering short workload handoffs. |
 | `debug` | `false` | Emit plugin loading and native assertion transition messages. |
 | `helperPath` | Bundled platform binary | Absolute path to an alternative protocol-v1 helper for this OS and architecture. |

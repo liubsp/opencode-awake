@@ -56,7 +56,7 @@ See [Microsoft's power-request documentation](https://learn.microsoft.com/en-us/
 Set `debug` to `true` to emit plugin loading and native assertion transition messages. See
 [configuration](CONFIGURATION.md) for all options.
 
-Snapshot failures don't renew old leases. The helper releases within 30 seconds of its last
+Snapshot failures don't renew old leases. The helper releases within three minutes of its last
 valid renewal, and protection resumes when activity can be verified again. Separate plugin
 instances have independent leases; unloading one doesn't release another's request.
 

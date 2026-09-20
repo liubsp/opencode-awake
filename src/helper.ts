@@ -4,7 +4,7 @@ import { fileURLToPath } from "node:url";
 import { randomUUID } from "node:crypto";
 import { accessSync, constants } from "node:fs";
 
-export const LEASE_MS = 30_000;
+export const LEASE_MS = 180_000;
 type Log = (message: string) => void;
 
 export function defaultHelperPath(): string {
@@ -17,6 +17,7 @@ export class HelperClient {
   private child?: ChildProcessWithoutNullStreams;
   private ready = false;
   private blocked = false;
+  private readonly pending = new Set<string>();
   private closing = false;
   private retryAt = 0;
   private readonly timer: ReturnType<typeof setInterval>;
@@ -36,7 +37,9 @@ export class HelperClient {
   }
 
   private send(owner: string): void {
-    if (!this.child || !this.ready || this.blocked) return;
+    if (!this.child || !this.ready) return;
+    if (this.blocked) { this.pending.add(owner); return; }
+    this.pending.delete(owner);
     const ttl = Math.max(0, Math.min(LEASE_MS, Math.ceil((this.owners.get(owner) ?? 0) - performance.now())));
     this.blocked = !this.child.stdin.write(JSON.stringify({ owner, active: ttl > 0, ttl_ms: ttl }) + "\n");
   }
@@ -57,6 +60,7 @@ export class HelperClient {
     this.child = child;
     this.ready = false;
     this.blocked = false;
+    this.pending.clear();
     const startup = setTimeout(() => {
       if (!this.ready && this.child === child) {
         this.log("native helper did not become ready; terminating it");
@@ -82,10 +86,10 @@ export class HelperClient {
       }
     });
     child.stdin.on("drain", () => {
-      if (this.child !== child) return;
+      if (this.child !== child || !this.blocked) return;
       this.blocked = false;
-      for (const owner of this.owners.keys()) this.send(owner);
-      // Removed owners expire in the helper even if a release was lost to backpressure.
+      // write(false) already queued its message. Only flush updates that were deferred afterward.
+      for (const owner of [...this.pending]) this.send(owner);
     });
     child.stdin.on("error", () => child.kill());
     child.stderr.on("data", (chunk: Buffer) => this.log(chunk.toString("utf8").trim().slice(0, 2_000)));
