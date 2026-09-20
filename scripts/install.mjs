@@ -65,7 +65,7 @@ export async function install({ source, dataDir, configDir, binDir }) {
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  if (!(process.platform === "win32" || (process.platform === "darwin" && process.arch === "arm64"))) throw new Error("Supported targets: Windows and Apple Silicon macOS");
+  if (!(process.platform === "win32" || process.platform === "darwin")) throw new Error("Supported platforms: Windows and macOS");
   await install({ source: fileURLToPath(new URL("../", import.meta.url)), ...defaults() });
   console.log("OpenCode Awake installed and registered globally. OpenCode will reload its configuration.");
 }

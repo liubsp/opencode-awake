@@ -2,13 +2,13 @@
 
 ## Prerequisites
 
-- OpenCode V2 (tested with 2.0.8).
+- OpenCode V2.
 - Node.js 22+, npm, and Rust stable.
-- Windows 11: Visual Studio C++ Build Tools.
-- macOS (Apple Silicon): Xcode command-line tools.
+- Windows: Visual Studio C++ Build Tools.
+- macOS: Xcode command-line tools.
 
-The installer builds from source. Windows 11 has been live-tested; macOS runtime validation is
-pending. Rust and build tools are needed for installation and updates, not normal plugin use.
+The installer builds from source for the local toolchain. Rust and build tools are needed for
+installation and updates, not normal plugin use. See [validation](VALIDATION.md) for test coverage.
 
 ## One-command setup
 
@@ -20,7 +20,7 @@ Run from any directory.
 & ([scriptblock]::Create((Invoke-WebRequest -UseBasicParsing 'https://raw.githubusercontent.com/liubsp/opencode-awake/main/scripts/install.ps1').Content))
 ```
 
-**macOS · Apple Silicon**
+**macOS**
 
 ```sh
 curl -fsSL https://raw.githubusercontent.com/liubsp/opencode-awake/main/scripts/install.sh | bash

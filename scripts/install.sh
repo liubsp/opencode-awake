@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
-if [[ "$(uname -s)" != Darwin || "$(uname -m)" != arm64 ]]; then
-  echo 'This installer targets Apple Silicon macOS.' >&2
+if [[ "$(uname -s)" != Darwin ]]; then
+  echo 'This installer targets macOS.' >&2
   exit 1
 fi
 for command in node npm cargo curl tar; do

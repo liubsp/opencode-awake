@@ -13,12 +13,13 @@ Verified for **Windows 11 with OpenCode 2.0.8**:
 - Unloading the first location preserved the second; final unload terminated the helper.
 
 The macOS implementation and CI jobs are present, but **macOS runtime validation is pending**.
-The workflow targets Windows and Apple Silicon macOS; adding the workflow is not evidence that
-those remote jobs passed.
+CI covers Windows and Apple Silicon macOS. Intel macOS is not currently in the test matrix;
+the installer builds for the local toolchain on either architecture. CI results are tracked in
+the repository's workflow runs.
 
 Actual screen-off and idle-sleep timeout behavior still requires hardware testing. Native API
-acquisition passed without elevation; verification using the Windows `powercfg /requests`
-listing remains pending. That diagnostic may require elevation.
+acquisition passed without elevation. A user-provided Windows `powercfg /requests` report
+confirmed the helper's SYSTEM request with no DISPLAY request. That diagnostic requires elevation.
 
 ## Automated tests
 

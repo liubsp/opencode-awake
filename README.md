@@ -11,12 +11,12 @@ while work is active, and releases its request when the last session finishes.
 - **System sleep only**, with normal display timeout and screen locking.
 - **Concurrent sessions and child agents**, tracked across the OpenCode service.
 - **Automatic cleanup**, including owner-process exit and expired activity leases.
-- **Native Rust helper** for Windows and macOS (Apple Silicon), connected through a V2 plugin.
+- **Native Rust helper** for Windows and macOS, connected through a V2 plugin.
 
 ## Install
 
 Requires **OpenCode V2, Node.js 22+, npm, and Rust stable**, plus the platform's C++ build tools.
-Tested with OpenCode 2.0.8 on Windows 11; macOS runtime validation is pending.
+See [validation status](docs/VALIDATION.md) for tested environments and pending checks.
 
 **Windows · PowerShell**
 
@@ -24,7 +24,7 @@ Tested with OpenCode 2.0.8 on Windows 11; macOS runtime validation is pending.
 & ([scriptblock]::Create((Invoke-WebRequest -UseBasicParsing 'https://raw.githubusercontent.com/liubsp/opencode-awake/main/scripts/install.ps1').Content))
 ```
 
-**macOS · Apple Silicon**
+**macOS**
 
 ```sh
 curl -fsSL https://raw.githubusercontent.com/liubsp/opencode-awake/main/scripts/install.sh | bash

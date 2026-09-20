@@ -50,7 +50,7 @@ See [Microsoft's power-request documentation](https://learn.microsoft.com/en-us/
 | Missing native helper | Run `opencode-awake update` on the target machine, or configure an alternative `helperPath`. |
 | Active-session snapshot unavailable | Check `opencode service status`. Standalone/custom servers need their own connection options. |
 | A different server was discovered | Configure `serverUrl` or `serviceFile` for the plugin's actual host process. |
-| Sleep remains inhibited after work ends | Check `opencode-awake status` for other sessions or applications holding power requests. |
+| Sleep remains inhibited after work ends | Check `opencode-awake status` for active sessions; use `status --os` to inspect power requests from all applications. |
 | `powercfg /requests` reports access denied | Run the diagnostic from an elevated terminal. |
 
 Set `debug` to `true` to emit plugin loading and native assertion transition messages. See
