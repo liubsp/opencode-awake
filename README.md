@@ -16,7 +16,7 @@ while work is active, and releases its request when the last session finishes.
 ## Install
 
 Requires **OpenCode V2, Node.js 22+, npm, and Rust stable**, plus the platform's C++ build tools.
-Tested with OpenCode 2.0.8 on Windows x64; macOS runtime validation is pending.
+Tested with OpenCode 2.0.8 on Windows 11; macOS runtime validation is pending.
 
 Clone the repository and build:
 

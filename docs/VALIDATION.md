@@ -2,7 +2,7 @@
 
 ## Current status
 
-Verified for **Windows x64 with OpenCode 2.0.8**:
+Verified for **Windows 11 with OpenCode 2.0.8**:
 
 - Release build and TypeScript checks.
 - 13 TypeScript/Node tests, including real Windows power-request acquisition and cleanup.

@@ -7,7 +7,7 @@
 - Windows: Visual Studio C++ Build Tools.
 - macOS (Apple Silicon): Xcode command-line tools.
 
-Windows x64 has been live-tested. macOS support is implemented, with runtime validation pending.
+Windows 11 has been live-tested. macOS support is implemented, with runtime validation pending.
 
 ## Build from a checkout
 
