@@ -9,20 +9,22 @@ Defaults work without options. To customize the plugin, use the object form in O
   "plugins": [{
     "package": "C:/path/to/opencode-awake",
     "options": {
-      "pollMs": 2000,
-      "releaseDelayMs": 1000,
+      "pollSeconds": 10,
+      "releaseDelaySeconds": 1,
       "debug": false
     }
   }]
 }
 ```
 
-Use your actual checkout path and preserve other entries and settings.
+Keep the package path written by the installer; add or edit only its options. Preserve other
+plugin entries and settings. Timing values are whole seconds. The installer migrates old
+`pollMs`/`releaseDelayMs` settings when updating an earlier checkout installation.
 
 | Option | Default | Meaning |
 | --- | --- | --- |
-| `pollMs` | `2000` | Active-session snapshot interval, 250–10000 milliseconds. Live events trigger earlier updates. |
-| `releaseDelayMs` | `1000` | Final-release debounce, 0–5000 milliseconds, covering short workload handoffs. |
+| `pollSeconds` | `10` | Recovery snapshot interval, 1–10 whole seconds. Live events trigger earlier updates. |
+| `releaseDelaySeconds` | `1` | Final-release debounce, 0–5 whole seconds, covering short workload handoffs. |
 | `debug` | `false` | Emit plugin loading and native assertion transition messages. |
 | `helperPath` | Bundled platform binary | Absolute path to an alternative protocol-v1 helper for this OS and architecture. |
 | `serviceFile` | Standard OpenCode discovery | Absolute path to an alternative service registration file. |

@@ -6,15 +6,16 @@ Start an OpenCode session as usual. The plugin watches the service's running ses
 its power request automatically. Closing the UI doesn't release protection while the service
 still has work running.
 
-To inspect the local service and OS power requests, run from the checkout:
+To inspect the local service and OS power requests, run from any directory:
 
 ```sh
-npm run status
+opencode-awake status
 ```
 
-It shows the active-session count, then invokes `powercfg /requests` on Windows or
-`pmset -g assertions` on macOS. The OS report includes other applications' requests too.
-Windows may require an elevated terminal for this diagnostic; the plugin itself doesn't.
+It lists active executions across the service, including child agents and sessions outside the
+visible UI. Normal status does not require elevation. Add `--os` for `powercfg /requests` on
+Windows or `pmset -g assertions` on macOS. This optional system-wide report includes other
+applications and requires elevation on Windows; the plugin itself doesn't.
 
 ## What counts as running?
 
@@ -44,11 +45,12 @@ See [Microsoft's power-request documentation](https://learn.microsoft.com/en-us/
 
 | Symptom | What to check |
 | --- | --- |
-| Plugin doesn't load | Run `npm run build` and check that the configured path points to the checkout containing `index.js`. |
-| Missing native helper | Build on the target machine, or set an absolute `helperPath` for its OS and architecture. |
+| Command not found | Open a new terminal after installation, or rerun the installer to restore the command. |
+| Plugin doesn't load | Rerun the installer; if OpenCode hasn't reloaded, restart its service after current work finishes. |
+| Missing native helper | Run `opencode-awake update` on the target machine, or configure an alternative `helperPath`. |
 | Active-session snapshot unavailable | Check `opencode service status`. Standalone/custom servers need their own connection options. |
 | A different server was discovered | Configure `serverUrl` or `serviceFile` for the plugin's actual host process. |
-| Sleep remains inhibited after work ends | Check `npm run status` for other sessions or applications holding power requests. |
+| Sleep remains inhibited after work ends | Check `opencode-awake status` for other sessions or applications holding power requests. |
 | `powercfg /requests` reports access denied | Run the diagnostic from an elevated terminal. |
 
 Set `debug` to `true` to emit plugin loading and native assertion transition messages. See

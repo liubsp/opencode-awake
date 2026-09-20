@@ -5,7 +5,7 @@
 Verified for **Windows 11 with OpenCode 2.0.8**:
 
 - Release build and TypeScript checks.
-- 13 TypeScript/Node tests, including real Windows power-request acquisition and cleanup.
+- TypeScript/Node tests, including real Windows power-request acquisition, installer lifecycle, and cleanup.
 - 3 Rust unit tests for independent lease accounting and expiry.
 - Rust formatting and Clippy with warnings treated as errors.
 - Installed-tarball smoke test, including its bundled native helper.

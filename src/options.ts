@@ -11,6 +11,9 @@ export interface Options {
 }
 
 export function parseOptions(input: Record<string, unknown>): Options {
+  if (input.pollMs !== undefined || input.releaseDelayMs !== undefined) {
+    throw new Error("opencode-awake: use pollSeconds and releaseDelaySeconds instead of millisecond options");
+  }
   const number = (name: string, fallback: number, min: number, max: number) => {
     const value = input[name] ?? fallback;
     if (typeof value !== "number" || !Number.isInteger(value) || value < min || value > max) {
@@ -35,8 +38,8 @@ export function parseOptions(input: Record<string, unknown>): Options {
   }
   if (input.debug !== undefined && typeof input.debug !== "boolean") throw new Error("opencode-awake: debug must be boolean");
   return {
-    pollMs: number("pollMs", 2_000, 250, 10_000),
-    releaseDelayMs: number("releaseDelayMs", 1_000, 0, 5_000),
+    pollMs: number("pollSeconds", 10, 1, 10) * 1_000,
+    releaseDelayMs: number("releaseDelaySeconds", 1, 0, 5) * 1_000,
     helperPath, serviceFile, serverUrl, authorizationEnv: string("authorizationEnv"), debug: input.debug === true,
   };
 }

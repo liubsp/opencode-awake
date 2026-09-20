@@ -18,37 +18,33 @@ while work is active, and releases its request when the last session finishes.
 Requires **OpenCode V2, Node.js 22+, npm, and Rust stable**, plus the platform's C++ build tools.
 Tested with OpenCode 2.0.8 on Windows 11; macOS runtime validation is pending.
 
-Clone the repository and build:
+**Windows · PowerShell**
+
+```powershell
+& ([scriptblock]::Create((Invoke-WebRequest -UseBasicParsing 'https://raw.githubusercontent.com/liubsp/opencode-awake/main/scripts/install.ps1').Content))
+```
+
+**macOS · Apple Silicon**
 
 ```sh
-git clone https://github.com/liubsp/opencode-awake.git
-cd opencode-awake
-npm ci
-npm run build
+curl -fsSL https://raw.githubusercontent.com/liubsp/opencode-awake/main/scripts/install.sh | bash
 ```
 
-Add the checkout to `plugins` in your global `~/.config/opencode/opencode.json(c)`:
-
-```jsonc
-{
-  "$schema": "https://opencode.ai/config.json",
-  "plugins": ["C:/path/to/opencode-awake"]
-}
-```
-
-Replace the example with your checkout's absolute path; on macOS, use `/path/to/opencode-awake`.
-Keep existing plugin entries, and use the config under `XDG_CONFIG_HOME` when set.
-See [installation](docs/INSTALLATION.md) for per-project setup, updates, and removal.
+Setup builds and installs into your user-data directory, registers the plugin globally, and adds
+the `opencode-awake` command. No checkout or JSON editing needed. On macOS, open a new terminal
+after setup. See [installation](docs/INSTALLATION.md) for updates and removal.
 
 ## Use it
 
 Start an OpenCode session as usual. The plugin manages sleep protection automatically, including
 when you close the UI while the service keeps working.
 
-To inspect running sessions and OS power requests, run from the checkout:
+Use the installed command from any directory:
 
 ```sh
-npm run status
+opencode-awake status
+opencode-awake update
+opencode-awake uninstall
 ```
 
 See [usage and troubleshooting](docs/USAGE.md) for diagnostics and what counts as running.
@@ -56,7 +52,7 @@ See [usage and troubleshooting](docs/USAGE.md) for diagnostics and what counts a
 ## What to expect
 
 The plugin protects the **machine hosting the OpenCode service**. It checks active sessions every
-**two seconds**, responds to live events, and releases **one second** after the final idle snapshot.
+**ten seconds** as recovery, responds to live events, and releases **one second** after the final idle snapshot.
 If activity can't be verified, its last lease expires within **30 seconds**.
 
 Permission waits follow OpenCode's active status. Detached processes after their session becomes
